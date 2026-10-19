@@ -28,7 +28,11 @@ packages = [
 
 [tool.ruff]
 line-length = 100
-
+include = ["backend/**/*.py", "frontend/**/*.py"]
 
 [tool.ruff.lint]
 select = ["E", "F", "UP", "I", "N"]
+
+[tool.pytest.ini_options]
+pythonpath = ["backend/"]
+testpaths = ["backend/test/*.py"]
