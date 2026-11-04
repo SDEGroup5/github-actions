@@ -1,7 +1,7 @@
 name: Formatting Checks
 
 on:
-    push
+  push
 
 jobs:
   code-quality:

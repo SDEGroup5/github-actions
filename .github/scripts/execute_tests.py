@@ -23,7 +23,7 @@ def execute_test() -> int:
 
     try:
         result: int = subprocess.call([
-            'pytest', "--cov=backend",
+            'pytest', "--cov=app",
             f"--cov-report=json:{COVERAGE_FILE_NAME}"
         ],
                                       stdout=subprocess.DEVNULL,

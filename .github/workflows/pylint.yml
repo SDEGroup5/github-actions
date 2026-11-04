@@ -25,16 +25,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install pylint
 
-      - name: Lint Backend
-        working-directory: backend
+      - name: Lint App
+        working-directory: app
         env:
-          PYTHONPATH: ${{ github.workspace }}/backend
-        run: |
-          pylint $(git ls-files '*.py')
-
-      - name: Lint Frontend
-        working-directory: frontend
-        env:
-          PYTHONPATH: ${{ github.workspace }}/frontend
+          PYTHONPATH: ${{ github.workspace }}/app
         run: |
           pylint $(git ls-files '*.py')
