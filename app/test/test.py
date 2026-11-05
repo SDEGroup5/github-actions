@@ -1,5 +1,5 @@
 """
-This module contain the test for the PostgreConnector class
+This module contains the tests for the application
 """
 
 import json
@@ -17,6 +17,7 @@ from src.server.server import Server
 # Server tests
 # pylint: disable=duplicate-code
 # Lines are duplicate with main since integration testing follows common code
+
 
 def test_server_get_successful():
     '''
@@ -75,7 +76,7 @@ def test_server_get_successful():
 
 
 @pytest.mark.parametrize(
-    "endpoint, json_path, expected_status, expected_response",
+    "endpoint, path, expected_st, expected_response",
     [("/number", "/json/data.json", 404, {
         "error": "Endpoint not found"
     }),

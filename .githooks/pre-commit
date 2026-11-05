@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SRC="frontend/ backend/"
+SRC="app/"
 
 # Use local tools if available
 if command -v ruff &> /dev/null && command -v yapf &> /dev/null && command -v pylint &> /dev/null; then

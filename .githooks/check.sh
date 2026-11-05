@@ -2,7 +2,7 @@
 set -euo pipefail
 
 THRESHOLD=9.95
-SRC="backend frontend"
+SRC="app"
 
 echo "Running ruff check..."
 ruff check
