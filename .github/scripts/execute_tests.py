@@ -22,13 +22,11 @@ def execute_test() -> int:
         os.remove(COVERAGE_FILE_NAME)
 
     try:
-        result: int = subprocess.call([
-            'pytest', "--cov=backend",
-            f"--cov-report=json:{COVERAGE_FILE_NAME}"
-        ],
-                                      stdout=subprocess.DEVNULL,
-                                      stderr=subprocess.DEVNULL,
-                                      shell=False)
+        result: int = subprocess.call(
+            ['pytest', "--cov=app", f"--cov-report=json:{COVERAGE_FILE_NAME}"],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            shell=False)
     except (OSError, subprocess.SubprocessError) as err:
         if os.path.exists(COVERAGE_FILE_NAME):
             os.remove(COVERAGE_FILE_NAME)
