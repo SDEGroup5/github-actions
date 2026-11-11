@@ -1,6 +1,6 @@
 """
 This module contains the Server class which collect the user request
-and pass them to the appropriate router
+and pass them to the appropriate controller
 """
 
 import json
@@ -15,7 +15,7 @@ from src.controller.abstraction.i_controller import IController
 class Server(BaseHTTPRequestHandler):
     """
     This class provides the endpoints that route the requests to
-    the appropriate routers
+    the appropriate controllers
     """
 
     endpoint_controllers: dict[str, IController]
@@ -23,7 +23,7 @@ class Server(BaseHTTPRequestHandler):
     def __init__(self, request: socket, client_address: Any,
                  server: BaseServer, endpoint_controllers: dict[str,
                                                                 IController]):
-        # Register routers for specific routes
+        # Register controllers for specific routes
         self.endpoint_controllers = endpoint_controllers
 
         # Initialize the base class
@@ -36,20 +36,21 @@ class Server(BaseHTTPRequestHandler):
         """
         base_endpoint: str = self.path.strip("/").split("/", 1)[0]
 
-        router: IController | None = self.endpoint_controllers.get(
+        controller: IController | None = self.endpoint_controllers.get(
             base_endpoint)
 
-        if router is None:
+        if controller is None:
             self.send_json({"error": "Endpoint not found"}, 404)
             return
 
         specific_endpoint = self.path.strip("/").removeprefix(
             base_endpoint).strip("/")
 
-        result: tuple[bool, bytes] = router.handle_request(specific_endpoint)
+        result: tuple[bool,
+                      bytes] = controller.handle_request(specific_endpoint)
 
         if result[0] is False:
-            # See IRouter for documentation
+            # See IController for documentation
             self.send_json({"error": "Endpoint not found"}, 404)
             return
 
