@@ -66,7 +66,7 @@ def create_and_contact_server(method: str, url: str,
     server.server_close()
     server_thread.join()
 
-    return [response_bytes, response_code]
+    return response_bytes, response_code
 
 
 def test_server_get_successful():
@@ -109,7 +109,8 @@ def test_server_get_failure(endpoint: str, path: str, expected_st: int,
     component
     '''
 
-    response: HTTPResponse = create_and_contact_server("GET", endpoint, path)
+    response: tuple[bytes,
+                    int] = create_and_contact_server("GET", endpoint, path)
 
     assert json.loads(response[0].decode("utf-8")) == expected_response
     assert response[1] == expected_st
