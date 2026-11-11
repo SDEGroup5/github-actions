@@ -4,10 +4,10 @@ from functools import partial
 from http.server import HTTPServer
 
 from dotenv import dotenv_values  # pylint: disable=import-error
+from src.controller.abstraction.i_controller import IController
 from src.controller.json_controller import JsonController
-from src.router.abstraction.i_router import IRouter
-from src.router.json_router import JsonRouter
 from src.server.server import Server
+from src.service.json_service import JsonService
 
 
 def main():
@@ -18,14 +18,14 @@ def main():
     config = dotenv_values("/run/secrets/my_secret")
     json_path: str = str(config.get("DATA_PATH", "./json/data.json"))
 
-    json_controller: JsonController = JsonController(json_path)
+    json_service: JsonService = JsonService(json_path)
 
-    json_router: IRouter = JsonRouter(json_controller)
+    json_controller: IController = JsonController(json_service)
 
-    router_dict: dict[str, IRouter] = {"json": json_router}
+    controller_dict: dict[str, IController] = {"json": json_controller}
 
-    server_partial: partial[Server] = partial(Server,
-                                              endpoint_routers=router_dict)
+    server_partial: partial[Server] = partial(
+        Server, endpoint_controllers=controller_dict)
 
     server = HTTPServer(("0.0.0.0", 5000), server_partial)
 

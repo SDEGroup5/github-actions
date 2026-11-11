@@ -9,7 +9,7 @@ from socket import socket
 from socketserver import BaseServer
 from typing import Any
 
-from src.router.abstraction.i_router import IRouter
+from src.controller.abstraction.i_controller import IController
 
 
 class Server(BaseHTTPRequestHandler):
@@ -18,12 +18,13 @@ class Server(BaseHTTPRequestHandler):
     the appropriate routers
     """
 
-    endpoint_routers: dict[str, IRouter]
+    endpoint_controllers: dict[str, IController]
 
     def __init__(self, request: socket, client_address: Any,
-                 server: BaseServer, endpoint_routers: dict[str, IRouter]):
+                 server: BaseServer, endpoint_controllers: dict[str,
+                                                                IController]):
         # Register routers for specific routes
-        self.endpoint_routers = endpoint_routers
+        self.endpoint_controllers = endpoint_controllers
 
         # Initialize the base class
         super().__init__(request, client_address, server)
@@ -35,7 +36,8 @@ class Server(BaseHTTPRequestHandler):
         """
         base_endpoint: str = self.path.strip("/").split("/", 1)[0]
 
-        router: IRouter | None = self.endpoint_routers.get(base_endpoint)
+        router: IController | None = self.endpoint_controllers.get(
+            base_endpoint)
 
         if router is None:
             self.send_json({"error": "Endpoint not found"}, 404)

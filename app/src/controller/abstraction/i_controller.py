@@ -1,14 +1,14 @@
 """
-Contains the IRouter Interface. Each router should
+Contains the IController Interface. Each controller should
 implement it
 """
 
 from abc import ABC, abstractmethod
 
 
-class IRouter(ABC):  # pylint: disable=too-few-public-methods
+class IController(ABC):  # pylint: disable=too-few-public-methods
     '''
-    IRouter interface: routers are responsible of handling endpoints
+    IController interface: controllerss are responsible of handling endpoints
     of a specific route
     '''
 
@@ -16,7 +16,7 @@ class IRouter(ABC):  # pylint: disable=too-few-public-methods
     def handle_request(self, endpoint: str) -> tuple[bool, bytes]:
         '''
         Call the function that routes the specified request to the
-        appropriate controller and controller method.
+        appropriate service and service method.
 
         Returns true and the encoded response if an handler for the
         specified endpoint was found, false otherwise
