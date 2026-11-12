@@ -42,7 +42,7 @@ source .venv/bin/activate
 ## Authors
 - Caraffini Lorenzo @LorenzoCaraffini
 - Palmieri Filippo @FilizZPalm
-- Radice Lorenzo @ozneroL541
+- Radice Lorenzo @radix54
 - Schievano Matteo @FireStoat3
 - Stanicel David @Oziator
 

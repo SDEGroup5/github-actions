@@ -2,7 +2,5 @@ FROM python:3.14-slim
 RUN pip install --no-cache-dir ruff yapf pylint
 #COPY requirements.txt requirements.txt
 #RUN pip install --no-cache-dir -r ./requirements.txt
-COPY backend/ backend/
-COPY frontend/ frontend/
-RUN pip install --no-cache-dir -r backend/requirements.txt || true
-RUN pip install --no-cache-dir -r frontend/requirements.txt || true
+COPY app/ app/
+RUN pip install --no-cache-dir -r requirements.txt || true
