@@ -9,9 +9,7 @@
 
 [![Python application](https://github.com/SDEGroup5/github-actions/actions/workflows/python-app.yml/badge.svg?event=release)](https://github.com/SDEGroup5/github-actions/actions/workflows/python-app.yml)
 
-[![Backend Docker Image](https://github.com/SDEGroup5/github-actions/actions/workflows/backend-image.yml/badge.svg?event=registry_package)](https://github.com/SDEGroup5/github-actions/actions/workflows/backend-image.yml)
-
-[![Frontend Docker Image](https://github.com/SDEGroup5/github-actions/actions/workflows/frontend-image.yml/badge.svg?event=registry_package)](https://github.com/SDEGroup5/github-actions/actions/workflows/frontend.yml)
+[![Docker Image](https://github.com/SDEGroup5/github-actions/actions/workflows/docker-image.yml/badge.svg?event=registry_package)](https://github.com/SDEGroup5/github-actions/actions/workflows/docker-image.yml)
 
 # Github Actions
 A project to show how Github Action works.
