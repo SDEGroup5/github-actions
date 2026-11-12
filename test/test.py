@@ -9,6 +9,7 @@ from http.client import HTTPConnection, HTTPResponse
 from http.server import HTTPServer
 
 import pytest  # pylint: disable=import-error
+
 from src.controller.abstraction.i_controller import IController
 from src.controller.json_controller import JsonController
 from src.server.server import Server
@@ -75,7 +76,7 @@ def test_server_get_successful():
     GET request
     '''
 
-    json_path: str = "./app/json/data.json"
+    json_path: str = "./json/data.json"
     json_data: str = ""
 
     try:

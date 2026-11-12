@@ -4,6 +4,7 @@ from functools import partial
 from http.server import HTTPServer
 
 from dotenv import dotenv_values  # pylint: disable=import-error
+
 from src.controller.abstraction.i_controller import IController
 from src.controller.json_controller import JsonController
 from src.server.server import Server

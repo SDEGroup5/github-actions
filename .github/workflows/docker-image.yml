@@ -43,7 +43,7 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v7
         with:
-          context: ./app
-          file: ./app/Dockerfile.app
+          context: .
+          file: ./Dockerfile.app
           push: true
           tags: ghcr.io/${{ steps.image-version.outputs.image_repository }}/app:${{ steps.image-version.outputs.image_version }}
