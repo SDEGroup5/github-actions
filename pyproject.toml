@@ -34,4 +34,10 @@ line-length = 100
 select = ["E", "F", "UP", "I", "N"]
 
 [tool.pylint.main]
-ignore = [".venv"]
+ignore = [
+    ".venv",
+    ".github"
+]
+source-roots = ["."]
+# Pylint 4.0.7 crashes in this checker with Python 3.14.
+disable = ["variables"]

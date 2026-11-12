@@ -9,6 +9,8 @@ import sys
 
 CODE_COVERAGE_THRESHOLD: int = 80
 COVERAGE_FILE_NAME: str = ".coverage.json"
+PROJECT_ROOT: str = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "../.."))
 
 
 def execute_test() -> int:
@@ -22,11 +24,20 @@ def execute_test() -> int:
         os.remove(COVERAGE_FILE_NAME)
 
     try:
-        result: int = subprocess.call(
-            ['pytest', "--cov=app", f"--cov-report=json:{COVERAGE_FILE_NAME}"],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            shell=False)
+        environment = os.environ.copy()
+        environment[
+            "PYTHONPATH"] = PROJECT_ROOT + os.pathsep + environment.get(
+                "PYTHONPATH", "")
+        result: int = subprocess.call([
+            sys.executable, "-m", "pytest", "test/test.py",
+            "--cov=src/controller", "--cov=src/server", "--cov=src/service",
+            f"--cov-report=json:{COVERAGE_FILE_NAME}"
+        ],
+                                      stdout=subprocess.DEVNULL,
+                                      stderr=subprocess.DEVNULL,
+                                      env=environment,
+                                      cwd=PROJECT_ROOT,
+                                      shell=False)
     except (OSError, subprocess.SubprocessError) as err:
         if os.path.exists(COVERAGE_FILE_NAME):
             os.remove(COVERAGE_FILE_NAME)
@@ -34,7 +45,8 @@ def execute_test() -> int:
         return 1
 
     if result:
-        os.remove(COVERAGE_FILE_NAME)
+        if os.path.exists(COVERAGE_FILE_NAME):
+            os.remove(COVERAGE_FILE_NAME)
         print("Test executed: at least one test did not pass")
     else:
         print("Test executed: all passed")
