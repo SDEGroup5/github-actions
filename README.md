@@ -2,13 +2,10 @@
 
 
 [![Formatting Checks](https://github.com/SDEGroup5/github-actions/actions/workflows/yapf.yaml/badge.svg?event=check_run)](https://github.com/SDEGroup5/github-actions/actions/workflows/yapf.yaml)
-
 [![Quality Checks](https://github.com/SDEGroup5/github-actions/actions/workflows/ruff.yml/badge.svg?event=check_run)](https://github.com/SDEGroup5/github-actions/actions/workflows/ruff.yml)
-
 [![Pylint](https://github.com/SDEGroup5/github-actions/actions/workflows/pylint.yml/badge.svg?event=check_run)](https://github.com/SDEGroup5/github-actions/actions/workflows/pylint.yml)
 
 [![Python application](https://github.com/SDEGroup5/github-actions/actions/workflows/python-app.yml/badge.svg?event=release)](https://github.com/SDEGroup5/github-actions/actions/workflows/python-app.yml)
-
 [![Docker Image](https://github.com/SDEGroup5/github-actions/actions/workflows/docker-image.yml/badge.svg?event=registry_package)](https://github.com/SDEGroup5/github-actions/actions/workflows/docker-image.yml)
 
 # Github Actions
