@@ -1,0 +1,40 @@
+name: Build Linux binary
+
+on:
+  push:
+    branches: ["docker-build"]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Build application with Docker
+        run: |
+          docker build --platform linux/amd64 \
+            -f Dockerfile.app \
+            -t github-actions-app:build .
+
+      - name: Extract executable and data
+        run: |
+          mkdir -p dist/json
+          docker create --name binary-extract github-actions-app:build
+          docker cp binary-extract:/app/app dist/app
+          docker cp binary-extract:/app/json/data.json dist/json/data.json
+          docker rm binary-extract
+
+      - name: Create distribution archive
+        run: tar -czf binary-linux-amd64.tar.gz -C dist app json
+
+      - name: Upload binary artifact
+        uses: actions/upload-artifact@v7
+        with:
+          path: binary-linux-amd64.tar.gz
+          archive: false
+          if-no-files-found: error
