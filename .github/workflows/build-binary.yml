@@ -32,8 +32,9 @@ jobs:
       - name: Create distribution archive
         run: |
             cp run.sh dist/run.sh
+            cp run.ps1 dist/run.ps1
             chmod +x dist/run.sh
-            tar -czf binary-linux-amd64.tar.gz -C dist app json run.sh
+            tar -czf binary-linux-amd64.tar.gz -C dist app json run.sh run.ps1
     
       - name: Upload binary artifact
         uses: actions/upload-artifact@v7
