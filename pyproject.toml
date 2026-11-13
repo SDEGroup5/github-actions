@@ -33,11 +33,15 @@ line-length = 100
 [tool.ruff.lint]
 select = ["E", "F", "UP", "I", "N"]
 
+[tool.pytest.ini_options]
+testpaths = ["test/*.py"]
+
 [tool.pylint.main]
 ignore = [
     ".venv",
     ".github"
 ]
+
 source-roots = ["."]
 # Pylint 4.0.7 crashes in this checker with Python 3.14.
 disable = ["variables"]
