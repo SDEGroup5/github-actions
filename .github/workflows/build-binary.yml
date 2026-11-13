@@ -30,8 +30,11 @@ jobs:
           docker rm binary-extract
 
       - name: Create distribution archive
-        run: tar -czf binary-linux-amd64.tar.gz -C dist app json
-
+        run: |
+            cp run.sh dist/run.sh
+            chmod +x dist/run.sh
+            tar -czf binary-linux-amd64.tar.gz -C dist app json run.sh
+    
       - name: Upload binary artifact
         uses: actions/upload-artifact@v7
         with:
