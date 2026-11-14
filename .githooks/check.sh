@@ -2,7 +2,7 @@
 set -euo pipefail
 
 THRESHOLD=9.95
-SRC="app"
+SRC="."
 
 echo "Running ruff check..."
 ruff check

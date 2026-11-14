@@ -22,16 +22,26 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 packages = [
-    {include = "app"},
+    {include = "src"},
 ]
+
+
 
 [tool.ruff]
 line-length = 100
-include = ["app/**/*.py"]
 
 [tool.ruff.lint]
 select = ["E", "F", "UP", "I", "N"]
 
 [tool.pytest.ini_options]
-pythonpath = ["app/"]
-testpaths = ["app/test/*.py"]
+testpaths = ["test/*.py"]
+
+[tool.pylint.main]
+ignore = [
+    ".venv",
+    ".github"
+]
+
+source-roots = ["."]
+# Pylint 4.0.7 crashes in this checker with Python 3.14.
+disable = ["variables"]

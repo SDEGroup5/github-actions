@@ -25,6 +25,6 @@ RUN python -m nuitka \
 FROM alpine:3.24.2
 WORKDIR /app
 COPY --from=0 /app/bin/app /app/app
-COPY --from=0 /app/json/data.json /app/json/data.json
+COPY --from=0 /json/data.json /json/data.json
 RUN chmod +x /app/app
 CMD ["/app/app"]
