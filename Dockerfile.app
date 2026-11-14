@@ -2,6 +2,7 @@
 FROM python:3.14.8-alpine3.24
 # Preliminary steps
 WORKDIR /app
+# Install dependencies
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir nuitka dotenv
 # Nuitka build requirements
@@ -22,9 +23,9 @@ RUN python -m nuitka \
     src/main.py
 
 # Release
-FROM alpine:3.24.2
+FROM scratch
 WORKDIR /app
 COPY --from=0 /app/bin/app /app/app
-COPY --from=0 /json/data.json /json/data.json
+#COPY json/data.json /app/json/data.json
 RUN chmod +x /app/app
 CMD ["/app/app"]
