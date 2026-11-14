@@ -18,7 +18,6 @@ COPY . .
 # Build the application
 RUN python -m nuitka \
     --mode=onefile \
-    --include-data-files=json/data.json=data.json \
     --output-dir=${OUTPUT_DIR} \
     --output-filename=${OUTPUT_FILENAME} \
     src/main.py
@@ -31,5 +30,6 @@ COPY --from=builder /app/bin/app /app
 FROM debian:bookworm-slim AS runtime
 WORKDIR /app
 COPY --from=builder /app/bin/app /app/app
+COPY json/data.json /app/json/data.json
 RUN chmod +x /app/app
 CMD ["/app/app"]

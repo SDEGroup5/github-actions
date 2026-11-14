@@ -22,13 +22,9 @@ jobs:
             --target binary \
             --output type=local,dest=dist .
 
-      - name: Create distribution archive
-        run: |
-          tar -czf binary-linux-amd64.tar.gz -C dist app
-    
       - name: Upload binary artifact
         uses: actions/upload-artifact@v7
         with:
-          path: binary-linux-amd64.tar.gz
+          path: dist/app
           archive: false
           if-no-files-found: error

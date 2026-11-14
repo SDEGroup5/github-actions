@@ -1,5 +1,6 @@
 """Main file"""
 
+import sys
 from functools import partial
 from http.server import HTTPServer
 from pathlib import Path
@@ -18,10 +19,11 @@ def main():
     """
 
     if "__compiled__" in globals():
-        default_json_path = Path(__file__).resolve().parent / "data.json"
+        base_path = Path(sys.argv[0]).resolve().parent
     else:
-        default_json_path = Path(
-            __file__).resolve().parent.parent / "json" / "data.json"
+        base_path = Path(__file__).resolve().parent.parent
+
+    default_json_path = base_path / "json" / "data.json"
 
     config = dotenv_values("/run/secrets/my_secret")
     json_path: str = str(config.get("DATA_PATH", str(default_json_path)))
