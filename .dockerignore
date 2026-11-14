@@ -230,3 +230,4 @@ act
 .venv/
 Dockerfile*
 .yml
+.env*

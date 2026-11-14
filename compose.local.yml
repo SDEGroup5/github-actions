@@ -12,7 +12,7 @@ services:
         secrets:
             - my_secret
         volumes:
-            - ./app/json/data.json:/json/data.json:rw
+            - ./json/data.json:/app/json/data.json:rw
 
 networks:
     github-action-network:

@@ -43,5 +43,5 @@ FROM scratch
 WORKDIR /app
 COPY --from=builder /app/bin/app /app/app
 COPY --from=builder /runtime-libs/ /
-#COPY json/data.json /app/json/data.json
+#COPY --from=builder /app/json/data.json /app/json/data.json
 CMD ["/app/app"]
