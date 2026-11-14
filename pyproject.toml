@@ -35,6 +35,7 @@ select = ["E", "F", "UP", "I", "N"]
 
 [tool.pytest.ini_options]
 testpaths = ["test/*.py"]
+pythonpath = ["."]
 
 [tool.pylint.main]
 ignore = [
