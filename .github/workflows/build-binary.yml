@@ -19,22 +19,12 @@ jobs:
         run: |
           docker build --platform linux/amd64 \
             -f Dockerfile.app \
-            -t github-actions-app:build .
-
-      - name: Extract executable and data
-        run: |
-          mkdir -p dist/json
-          docker create --name binary-extract github-actions-app:build
-          docker cp binary-extract:/app/app dist/app
-          docker cp binary-extract:/app/json/data.json dist/json/data.json
-          docker rm binary-extract
+            --target binary \
+            --output type=local,dest=dist .
 
       - name: Create distribution archive
         run: |
-            cp run.sh dist/run.sh
-            cp run.ps1 dist/run.ps1
-            chmod +x dist/run.sh
-            tar -czf binary-linux-amd64.tar.gz -C dist app json run.sh run.ps1
+          tar -czf binary-linux-amd64.tar.gz -C dist app
     
       - name: Upload binary artifact
         uses: actions/upload-artifact@v7

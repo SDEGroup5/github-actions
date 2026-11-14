@@ -1,12 +1,13 @@
 # Building
-FROM python:3.14.8-alpine3.24
+FROM python:3.14-slim-bookworm AS builder
 # Preliminary steps
 WORKDIR /app
 RUN pip install --no-cache-dir --upgrade pip
-RUN pip install --no-cache-dir nuitka dotenv
 # Nuitka build requirements
-RUN apk add --no-cache build-base
-RUN pip install --no-cache-dir patchelf
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends build-essential patchelf \
+    && rm -rf /var/lib/apt/lists/*
+RUN pip install --no-cache-dir nuitka python-dotenv==1.1.1
 # Configuration
 ENV OUTPUT_DIR=/app/bin
 ENV OUTPUT_FILENAME=app
@@ -16,15 +17,19 @@ RUN mkdir -p ${OUTPUT_DIR}
 COPY . .
 # Build the application
 RUN python -m nuitka \
-    --standalone --onefile \
+    --mode=onefile \
+    --include-data-files=json/data.json=data.json \
     --output-dir=${OUTPUT_DIR} \
     --output-filename=${OUTPUT_FILENAME} \
     src/main.py
 
+# Export only the executable, without a runtime image.
+FROM scratch AS binary
+COPY --from=builder /app/bin/app /app
+
 # Release
-FROM alpine:3.24.2
+FROM debian:bookworm-slim AS runtime
 WORKDIR /app
-COPY --from=0 /app/bin/app /app/app
-COPY --from=0 /app/json/data.json /app/json/data.json
+COPY --from=builder /app/bin/app /app/app
 RUN chmod +x /app/app
 CMD ["/app/app"]
