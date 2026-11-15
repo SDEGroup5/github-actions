@@ -1,13 +1,14 @@
 # Building
-FROM python:3.14.8-alpine3.24 AS builder
+FROM python:3.14.8-slim-bookworm AS builder
 # Preliminary steps
 WORKDIR /app
 # Install dependencies
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir nuitka dotenv
 # Nuitka build requirements
-RUN apk add --no-cache build-base
-RUN pip install --no-cache-dir patchelf
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends build-essential patchelf \
+    && rm -rf /var/lib/apt/lists/*
 # Configuration
 ENV OUTPUT_DIR=/app/bin
 ENV OUTPUT_FILENAME=app
