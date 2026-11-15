@@ -1,5 +1,5 @@
 # Building
-FROM python:3.14.8-slim-bookworm AS builder
+FROM python:3.14-slim-bookworm AS builder
 # Preliminary steps
 WORKDIR /app
 # Install dependencies
@@ -18,11 +18,11 @@ RUN mkdir -p ${OUTPUT_DIR}
 COPY . .
 # Build the application
 RUN python -m nuitka \
-    --standalone \
-    --onefile \
+    --mode=onefile \
     --output-dir=${OUTPUT_DIR} \
     --output-filename=${OUTPUT_FILENAME} \
     src/main.py
 
+# Export only the executable, without a runtime image.
 FROM scratch AS app-only
-COPY --from=builder /app/bin/app /app-linux-amd64
+COPY --from=builder /app/bin/app /app
