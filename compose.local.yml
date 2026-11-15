@@ -1,7 +1,7 @@
 services:
     app:
         build:
-            context: ./app
+            context: .
             dockerfile: Dockerfile.app
         image: app:latest
         container_name: app
@@ -11,6 +11,8 @@ services:
         - github-action-network
         secrets:
             - my_secret
+        volumes:
+            - ./json/data.json:/app/json/data.json:rw
 
 networks:
     github-action-network:
@@ -19,7 +21,3 @@ networks:
 secrets:
     my_secret:
         file: .env
-
-volumes:
-    my_volume:
-        driver: local
