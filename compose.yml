@@ -1,33 +1,17 @@
 services:
-    backend:
-        image: ghcr.io/sdegroup5/github-actions/backend:latest
-        container_name: backend
+    app:
+        # TODO: Change the image to your own image
+        image: ghcr.io/sdegroup5/github-actions/app:latest
+        container_name: app
         ports:
         - "5000:5000"
         networks:
         - github-action-network
         secrets:
             - my_secret
-        depends_on:
-            - database
+        volumes:
+            - ./json/data.json:/app/json/data.json:rw
 
-    
-    frontend:
-        image: ghcr.io/sdegroup5/github-actions/frontend:latest
-        container_name: frontend
-        ports:
-        - "3000:3000"
-        networks:
-        - github-action-network
-    database:
-        image: postgres:15.3-alpine
-        container_name: database
-        env_file:
-        - .env
-        ports:
-        - "5432:5432"
-        networks:
-        - github-action-network
 networks:
     github-action-network:
         driver: bridge
@@ -35,7 +19,3 @@ networks:
 secrets:
     my_secret:
         file: .env
-
-volumes:
-    my_volume:
-        driver: local

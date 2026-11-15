@@ -1,7 +1,7 @@
 name: Formatting Checks
 
 on:
-    push
+  push
 
 jobs:
   code-quality:
@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
 

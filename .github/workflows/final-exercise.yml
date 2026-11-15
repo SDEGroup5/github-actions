@@ -1,0 +1,22 @@
+name: Final Exercise
+
+on:
+ push
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ${{ github.repository_owner }} final exercise
+        run: |
+          echo "Repository name: ${{ github.repository }}"
+          echo "Repository owner: ${{ github.repository_owner }}"
+
+  exercise:
+    runs-on: ubuntu-latest
+# TODO: Paste here Tests steps
+# TODO: Paste here Docker Image creation steps

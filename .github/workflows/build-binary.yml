@@ -1,0 +1,33 @@
+name: Build Linux binary
+
+on: 
+  push
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Build application with Docker
+        run: |
+          docker build \
+            --platform linux/amd64 \
+            -f Dockerfile.build \
+            --target app-only \
+            --output type=local,dest=dist .
+
+      - name: Name binary for its target platform
+        run: mv dist/app dist/app-linux-amd64
+      
+      - name: Upload binary artifact
+        uses: actions/upload-artifact@v7
+        with:
+          path: dist/app-linux-amd64
+          archive: false
+          if-no-files-found: error
