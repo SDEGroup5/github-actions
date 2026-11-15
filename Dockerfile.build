@@ -24,4 +24,4 @@ RUN python -m nuitka \
     src/main.py
 
 FROM scratch AS app-only
-COPY --from=builder /app/bin/app /app/app
+COPY --from=builder /app/bin/app /app-linux-amd64
