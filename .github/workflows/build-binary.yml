@@ -16,7 +16,7 @@ jobs:
 
       - name: Build application with Docker
         run: |
-          docker build
+          docker build \
             --platform linux/amd64 \
             -f Dockerfile.build \
             --target app-only \
