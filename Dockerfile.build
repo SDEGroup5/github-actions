@@ -17,7 +17,8 @@ RUN mkdir -p ${OUTPUT_DIR}
 COPY . .
 # Build the application
 RUN python -m nuitka \
-    --standalone --onefile \
+    --standalone \
+    --onefile \
     --output-dir=${OUTPUT_DIR} \
     --output-filename=${OUTPUT_FILENAME} \
     src/main.py

@@ -1,8 +1,7 @@
 name: Build Linux binary
 
-on:
-  push:
-    branches: ["docker-build"]
+on: 
+  push
 
 permissions:
   contents: read
@@ -17,14 +16,16 @@ jobs:
 
       - name: Build application with Docker
         run: |
-          docker build --platform linux/amd64 \
-            -f Dockerfile.binary \
-            --target binary \
+          docker build
+            --platform linux/amd64 \
+            -f Dockerfile.build \
+            --target app-only \
             --output type=local,dest=dist .
 
       - name: Upload binary artifact
         uses: actions/upload-artifact@v7
         with:
+          name: app-linux-amd64
           path: dist/app
-          archive: false
+          archive: true
           if-no-files-found: error
