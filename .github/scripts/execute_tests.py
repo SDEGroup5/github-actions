@@ -2,6 +2,8 @@
 This file contain the script that execute the various tests and see if they all pass
 """
 
+# pylint: disable=fixme
+
 import json
 import os
 import subprocess
@@ -11,6 +13,7 @@ CODE_COVERAGE_THRESHOLD: int = 80
 COVERAGE_FILE_NAME: str = ".coverage.json"
 PROJECT_ROOT: str = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "../.."))
+TODO: int = 1
 
 
 def execute_test() -> int:
@@ -24,10 +27,6 @@ def execute_test() -> int:
         os.remove(COVERAGE_FILE_NAME)
 
     try:
-        environment = os.environ.copy()
-        environment[
-            "PYTHONPATH"] = PROJECT_ROOT + os.pathsep + environment.get(
-                "PYTHONPATH", "")
         result: int = subprocess.call([
             sys.executable, "-m", "pytest", "test/test.py",
             "--cov=src/controller", "--cov=src/server", "--cov=src/service",
@@ -35,7 +34,6 @@ def execute_test() -> int:
         ],
                                       stdout=subprocess.DEVNULL,
                                       stderr=subprocess.DEVNULL,
-                                      env=environment,
                                       cwd=PROJECT_ROOT,
                                       shell=False)
     except (OSError, subprocess.SubprocessError) as err:
@@ -89,10 +87,16 @@ def main():
     Main script
     '''
 
-    test_result = execute_test()
-    test_coverage_result = read_coverage_result()
+    # TODO: execute the tests
+    # ruff: noqa: F841
+    test_result = TODO
 
-    sys.exit(test_result or test_coverage_result)
+    # TODO: check if coverage is above threshold
+    # ruff: noqa: F841
+    test_coverage_result = TODO
+
+    # TODO: return the correct exit code
+    sys.exit(TODO)
 
 
 if __name__ == "__main__":
