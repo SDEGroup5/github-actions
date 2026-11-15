@@ -21,6 +21,9 @@ jobs:
             -f Dockerfile.build \
             --target app-only \
             --output type=local,dest=dist .
+
+      - name: Name binary for its target platform
+        run: mv dist/app dist/app-linux-amd64
       
       - name: Upload binary artifact
         uses: actions/upload-artifact@v7
