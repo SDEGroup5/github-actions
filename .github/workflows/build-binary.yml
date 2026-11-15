@@ -21,11 +21,14 @@ jobs:
             -f Dockerfile.build \
             --target app-only \
             --output type=local,dest=dist .
+      
+      - name: Rename file
+        run: |
+          mv dist/app dist/app-linux-amd64
 
       - name: Upload binary artifact
         uses: actions/upload-artifact@v7
         with:
-          name: app-linux-amd64
-          path: dist/app
+          path: dist/app-linux-amd64
           archive: false
           if-no-files-found: error

@@ -1,0 +1,14 @@
+name: Final Exercise
+
+on:
+ push
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  exercise:
+    runs-on: ubuntu-latest
+# TODO: Paste here Tests steps
+# TODO: Paste here Docker Image creation steps
