@@ -27,5 +27,5 @@ jobs:
         with:
           name: app-linux-amd64
           path: dist/app
-          archive: true
+          archive: false
           if-no-files-found: error
