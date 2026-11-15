@@ -1,9 +1,7 @@
 services:
     app:
-        build:
-            context: .
-            dockerfile: Dockerfile.app
-        image: app:latest
+        # TODO: Change the image to your own image
+        image: ghcr.io/sdegroup5/github-actions/app:latest
         container_name: app
         ports:
         - "5000:5000"
