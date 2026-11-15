@@ -18,7 +18,7 @@ jobs:
       - name: Build application with Docker
         run: |
           docker build --platform linux/amd64 \
-            -f Dockerfile.app \
+            -f Dockerfile.binary \
             --target binary \
             --output type=local,dest=dist .
 

@@ -1,9 +1,7 @@
 """Main file"""
 
-import sys
 from functools import partial
 from http.server import HTTPServer
-from pathlib import Path
 
 from dotenv import dotenv_values  # pylint: disable=import-error
 
@@ -18,15 +16,8 @@ def main():
     Main function
     """
 
-    if "__compiled__" in globals():
-        base_path = Path(sys.argv[0]).resolve().parent
-    else:
-        base_path = Path(__file__).resolve().parent.parent
-
-    default_json_path = base_path / "json" / "data.json"
-
     config = dotenv_values("/run/secrets/my_secret")
-    json_path: str = str(config.get("DATA_PATH", str(default_json_path)))
+    json_path: str = str(config.get("DATA_PATH", "./json/data.json"))
 
     json_service: JsonService = JsonService(json_path)
 
