@@ -2,8 +2,6 @@
 This file contain the script that execute the various tests and see if they all pass
 """
 
-# pylint: disable=fixme
-
 import json
 import os
 import subprocess
@@ -87,16 +85,11 @@ def main():
     Main script
     '''
 
-    # TODO: execute the tests
-    # ruff: noqa: F841
-    test_result = TODO
+    test_result = execute_test()
 
-    # TODO: check if coverage is above threshold
-    # ruff: noqa: F841
-    test_coverage_result = TODO
+    test_coverage_result = read_coverage_result()
 
-    # TODO: return the correct exit code
-    sys.exit(TODO)
+    sys.exit(test_result or test_coverage_result)
 
 
 if __name__ == "__main__":
