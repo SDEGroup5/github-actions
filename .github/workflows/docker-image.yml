@@ -56,5 +56,6 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
+            ghcr.io/${{ steps.image-version.outputs.image_repository }}/app:${{ github.sha }}
             ghcr.io/${{ steps.image-version.outputs.image_repository }}/app:${{ steps.image-version.outputs.image_version }}
             ${{ github.event_name == 'release' && format('ghcr.io/{0}/app:latest', steps.image-version.outputs.image_repository) || '' }}
