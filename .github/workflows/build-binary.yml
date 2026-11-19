@@ -1,7 +1,9 @@
 name: Build Linux binary
 
 on: 
-  push
+  push:
+    # write your branch name
+    branches: [your-branch]
 
 permissions:
   contents: read
