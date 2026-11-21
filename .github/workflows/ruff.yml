@@ -1,7 +1,9 @@
 name: Quality Checks
 
 on:
-  push
+  push:
+    tags:
+      - 'v1.0.0'
 
 permissions:
   contents: read

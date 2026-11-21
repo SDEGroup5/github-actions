@@ -1,6 +1,9 @@
 name: Pylint
 
-on: [push]
+on:
+  push:
+    tags:
+      - 'v1.0.0'
 
 permissions:
   contents: read

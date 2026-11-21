@@ -1,7 +1,9 @@
 name: Formatting Checks
 
 on:
-  push
+  push:
+    tags:
+      - 'v1.0.0'
 
 jobs:
   code-quality:
