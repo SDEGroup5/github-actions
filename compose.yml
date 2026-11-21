@@ -2,7 +2,7 @@ services:
     app:
         # TODO: Change the image to your own image
         image: ghcr.io/sdegroup5/github-actions/app:latest
-        container_name: githuba-action-app
+        container_name: github-action-app
         ports:
         - "5000:5000"
         networks:
